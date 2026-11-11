@@ -11,11 +11,12 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
 
     const context = gsap.context(() => {
       const fragments = gsap.utils.toArray<HTMLElement>('[data-fragment]')
+
       gsap.set(fragments, {
         x: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-x')) || 0,
         y: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-y')) || 0,
         rotation: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-rotation')) || 0,
-        opacity: 0.12,
+        opacity: 0,
         scale: 0.72,
       })
 
@@ -36,22 +37,31 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
       })
 
       timeline
-        // Hold the complete wing composition first; then fold both wings toward the character.
-        .to('[data-wing-left]', { x: 110, scaleX: 0.12, opacity: 0, transformOrigin: '100% 50%', ease: 'power3.in' }, 0.02)
-        .to('[data-wing-right]', { x: -110, scaleX: 0.12, opacity: 0, transformOrigin: '0% 50%', ease: 'power3.in' }, 0.02)
-        .to('.wing-spine', { scaleY: 0, opacity: 0, ease: 'power2.in' }, 0.02)
+        // Let the complete identity wings read as a deliberate opening tableau.
+        .to({}, { duration: 0.8 })
+        // Fold both wings inward, like two halves closing around the character.
+        .to('[data-wing-left]', {
+          x: 110, scaleX: 0.12, opacity: 0, duration: 0.9,
+          transformOrigin: '100% 50%', ease: 'power3.in',
+        }, '>')
+        .to('[data-wing-right]', {
+          x: -110, scaleX: 0.12, opacity: 0, duration: 0.9,
+          transformOrigin: '0% 50%', ease: 'power3.in',
+        }, '<')
+        .to('.wing-spine', { scaleY: 0, opacity: 0, duration: 0.65, ease: 'power2.in' }, '<')
+        // The scattered words are released by the folding wings and assemble at the center.
         .to(fragments, {
-          x: 0, y: 0, rotation: 0, opacity: 1, scale: 1,
-          stagger: { each: 0.018, from: 'center' }, ease: 'power3.inOut',
-        }, 0.18)
-        .to('[data-avatar]', { y: -92, scale: 0.72, ease: 'power2.inOut' }, 0.28)
-        .to('[data-hero-title]', { y: -65, scale: 0.78, ease: 'power2.inOut' }, 0.34)
-        .to('.orbit-one', { rotation: 38, scale: 1.3, ease: 'none' }, 0.16)
-        .to('.orbit-two', { rotation: -42, scale: 0.82, ease: 'none' }, 0.16)
-        .to('.orbit-three', { rotation: 24, scale: 1.18, ease: 'none' }, 0.16)
-        .to('.hero-copy-top', { y: -42, opacity: 0, ease: 'none' }, 0.34)
-        .to('.scroll-cue', { y: 22, opacity: 0, ease: 'none' }, 0.34)
-        .to('.awakening-halo', { scale: 1.6, opacity: 0.12, ease: 'none' }, 0.16)
+          x: 0, y: 0, rotation: 0, opacity: 1, scale: 1, duration: 1.25,
+          stagger: { each: 0.035, from: 'edges' }, ease: 'power3.inOut',
+        }, '-=0.28')
+        .to('[data-avatar]', { y: -92, scale: 0.72, duration: 1.1, ease: 'power2.inOut' }, '-=0.45')
+        .to('[data-hero-title]', { y: -65, scale: 0.78, duration: 1.05, ease: 'power2.inOut' }, '<')
+        .to('.orbit-one', { rotation: 38, scale: 1.3, duration: 1.4, ease: 'none' }, '<')
+        .to('.orbit-two', { rotation: -42, scale: 0.82, duration: 1.4, ease: 'none' }, '<')
+        .to('.orbit-three', { rotation: 24, scale: 1.18, duration: 1.4, ease: 'none' }, '<')
+        .to('.hero-copy-top', { y: -42, opacity: 0, duration: 0.7, ease: 'none' }, '-=0.55')
+        .to('.scroll-cue', { y: 22, opacity: 0, duration: 0.7, ease: 'none' }, '<')
+        .to('.awakening-halo', { scale: 1.6, opacity: 0.12, duration: 1.4, ease: 'none' }, '<')
     }, element)
 
     return () => {
