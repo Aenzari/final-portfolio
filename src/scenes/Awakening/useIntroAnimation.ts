@@ -11,7 +11,6 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
 
     const context = gsap.context(() => {
       const fragments = gsap.utils.toArray<HTMLElement>('[data-fragment]')
-      const progress = { value: 0 }
       gsap.set(fragments, {
         x: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-x')) || 0,
         y: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-y')) || 0,
@@ -52,7 +51,6 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
         .to('.hero-copy-top', { y: -42, opacity: 0, ease: 'none' }, 0.1)
         .to('.scroll-cue', { y: 22, opacity: 0, ease: 'none' }, 0.1)
         .to('.awakening-halo', { scale: 1.6, opacity: 0.12, ease: 'none' }, 0)
-        .to(progress, { value: 1, ease: 'none' }, 0)
         .to(element, { '--hero-scene-shift': '1', ease: 'none' }, 0)
     }, element)
 
