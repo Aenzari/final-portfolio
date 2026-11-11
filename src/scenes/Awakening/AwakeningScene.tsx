@@ -34,7 +34,7 @@ export function AwakeningScene() {
         ))}
       </div>
       <div className="hero-copy hero-copy-top"><span className="eyebrow">INDEPENDENT MIND / DIGITAL CRAFT</span></div>
-      <div className="avatar-wrap" data-avatar><AvatarStage /></div>
+      <div className="avatar-wrap" data-avatar><AvatarStage reducedMotion={reducedMotion} /></div>
       <div className="hero-title" data-hero-title>
         <p className="hero-kicker">HELLO, I'M</p>
         <h1>MAYK<span>.</span></h1>
