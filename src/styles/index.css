@@ -349,3 +349,42 @@
  .universe-detail,.universe-detail-mark{animation:none}
  .universe-tags span{transition:none}
 }
+
+
+/* Opening identity wings — the structured composition before the awakening */
+.awakening-scene{isolation:isolate}
+.wing-composition{position:absolute;z-index:4;inset:0;display:grid;grid-template-columns:1fr minmax(220px,28vw) 1fr;align-items:center;padding:8vh clamp(22px,6vw,90px) 11vh;pointer-events:none}
+.wing-panel{position:relative;min-width:0;min-height:310px;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:clamp(20px,3vw,46px);border-top:1px solid #77749b70;border-bottom:1px solid #77749b70;will-change:transform,opacity;backdrop-filter:blur(1px)}
+.wing-panel:before,.wing-panel:after{content:"";position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(transparent,#77749b70 18%,#77749b70 82%,transparent)}
+.wing-panel-left{align-items:flex-end;text-align:right;border-left:1px solid #77749b70;clip-path:polygon(0 12%,100% 0,100% 100%,0 88%);background:linear-gradient(100deg,#77749b0c,transparent)}
+.wing-panel-left:before{right:0}
+.wing-panel-right{align-items:flex-start;text-align:left;border-right:1px solid #77749b70;clip-path:polygon(0 0,100% 12%,100% 88%,0 100%);background:linear-gradient(260deg,#77749b0c,transparent)}
+.wing-panel-right:before{left:0}
+.wing-overline,.wing-coordinate,.wing-middle{font:9px var(--mono);letter-spacing:.18em;color:#77749b}
+.wing-name,.wing-role{font-size:clamp(24px,3.55vw,54px);line-height:.91;letter-spacing:-.075em;font-weight:650;margin:0;color:#34313e}
+.wing-role em{font:italic 500 .86em var(--serif);letter-spacing:-.04em;color:#77749b}
+.wing-middle{padding-top:13px;border-top:1px solid #77749b45}
+.wing-coordinate{font-size:8px;color:#777680}
+.wing-spine{position:absolute;left:50%;top:50%;width:1px;height:43%;transform:translate(-50%,-50%);background:linear-gradient(transparent,#77749b80,transparent);display:grid;place-items:center}
+.wing-spine span{font-size:24px;color:#77749b;background:var(--paper);padding:12px}
+.fragment-field{z-index:5}
+.avatar-wrap{z-index:6}
+.hero-title{z-index:7}
+@media(max-width:800px){
+ .wing-composition{grid-template-columns:1fr minmax(130px,28vw) 1fr;padding:13vh 12px 14vh}
+ .wing-panel{min-height:230px;padding:15px 10px;gap:12px}
+ .wing-name,.wing-role{font-size:clamp(18px,3.5vw,30px)}
+ .wing-overline,.wing-coordinate,.wing-middle{font-size:7px;letter-spacing:.1em}
+}
+@media(max-width:520px){
+ .wing-composition{grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;align-items:start;padding:17vh 14px 15vh}
+ .wing-panel{min-height:0;height:190px;padding:13px 10px;gap:10px}
+ .wing-name,.wing-role{font-size:clamp(17px,5vw,25px)}
+ .wing-panel-left{grid-column:1;grid-row:1}
+ .wing-panel-right{grid-column:2;grid-row:1}
+ .wing-spine{top:48%;height:25%}
+ .wing-coordinate{font-size:6px}
+ .avatar-wrap{top:29%;width:76vw;height:42%}
+ .hero-title{top:66%}
+}
+[data-motion="reduced"] .wing-panel{opacity:1!important;transform:none!important}
