@@ -11,6 +11,7 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
 
     const context = gsap.context(() => {
       const fragments = gsap.utils.toArray<HTMLElement>('[data-fragment]')
+      const lines = gsap.utils.toArray<SVGPathElement>('.wing-drawing path')
 
       gsap.set(fragments, {
         x: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-x')) || 0,
@@ -18,6 +19,10 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
         rotation: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-rotation')) || 0,
         opacity: 0,
         scale: 0.72,
+      })
+      lines.forEach((line) => {
+        const length = line.getTotalLength()
+        gsap.set(line, { strokeDasharray: length, strokeDashoffset: 0 })
       })
 
       const timeline = gsap.timeline({
@@ -37,23 +42,14 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
       })
 
       timeline
-        // Let the complete identity wings read as a deliberate opening tableau.
-        .to({}, { duration: 0.8 })
-        // Fold both wings inward, like two halves closing around the character.
-        .to('[data-wing-left]', {
-          x: 110, scaleX: 0.12, opacity: 0, duration: 0.9,
-          transformOrigin: '100% 50%', ease: 'power3.in',
-        }, '>')
-        .to('[data-wing-right]', {
-          x: -110, scaleX: 0.12, opacity: 0, duration: 0.9,
-          transformOrigin: '0% 50%', ease: 'power3.in',
-        }, '<')
-        .to('.wing-spine', { scaleY: 0, opacity: 0, duration: 0.65, ease: 'power2.in' }, '<')
-        // The scattered words are released by the folding wings and assemble at the center.
+        .to({}, { duration: 0.9 })
+        .to('[data-wing-left]', { x: -90, opacity: 0, duration: 0.85, ease: 'power2.in' }, '>')
+        .to('[data-wing-right]', { x: 90, opacity: 0, duration: 0.85, ease: 'power2.in' }, '<')
+        .to(lines, { strokeDashoffset: (index) => index < 2 ? 900 : 520, opacity: 0, duration: 0.9, stagger: 0.035, ease: 'power2.in' }, '<')
         .to(fragments, {
           x: 0, y: 0, rotation: 0, opacity: 1, scale: 1, duration: 1.25,
           stagger: { each: 0.035, from: 'edges' }, ease: 'power3.inOut',
-        }, '-=0.28')
+        }, '-=0.18')
         .to('[data-avatar]', { y: -92, scale: 0.72, duration: 1.1, ease: 'power2.inOut' }, '-=0.45')
         .to('[data-hero-title]', { y: -65, scale: 0.78, duration: 1.05, ease: 'power2.inOut' }, '<')
         .to('.orbit-one', { rotation: 38, scale: 1.3, duration: 1.4, ease: 'none' }, '<')
