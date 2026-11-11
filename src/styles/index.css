@@ -529,3 +529,79 @@
     font-size: 64px;
   }
 }
+
+
+/* Direction correction — one connected wing drawing, no boxed side panels */
+.awakening-scene{min-height:680px}
+.wing-composition{position:absolute;inset:0;z-index:4;padding:0;display:block;pointer-events:none}
+.wing-drawing{position:absolute;inset:13% 5% 10%;width:90%;height:77%;overflow:visible;fill:none;stroke:#393642;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;opacity:.88}
+.wing-drawing .wing-frame{stroke-width:1.55}
+.wing-drawing path{vector-effect:non-scaling-stroke;will-change:stroke-dashoffset,opacity}
+.wing-identity{position:absolute;top:45%;z-index:2;width:30%;display:flex;flex-direction:column;gap:13px;will-change:transform,opacity}
+.wing-identity-left{left:8%;align-items:flex-start;text-align:left}
+.wing-identity-right{right:8%;align-items:flex-end;text-align:right}
+.wing-overline,.wing-coordinate,.wing-middle{font:9px var(--mono);letter-spacing:.16em;color:#77749b}
+.wing-name,.wing-role{font-size:clamp(22px,3.3vw,48px);line-height:.94;letter-spacing:-.075em;font-weight:650;margin:0;color:#34313e}
+.wing-role em{font:italic 500 .88em var(--serif);color:#77749b}
+.wing-middle{padding-top:10px;border-top:1px solid #77749b45}
+.wing-coordinate{font-size:8px;color:#777680}
+.wing-spine{display:none}
+.fragment-field{z-index:5}
+.avatar-wrap{z-index:6;top:12%;width:min(34vw,430px);height:57%}
+.hero-title{z-index:7;top:65%}
+.awakening-scene:after{z-index:1}
+@media(max-width:800px){
+ .wing-drawing{inset:17% 2% 14%;width:96%;height:69%}
+ .wing-identity{top:43%;width:32%;gap:9px}
+ .wing-identity-left{left:5%}.wing-identity-right{right:5%}
+ .wing-name,.wing-role{font-size:clamp(17px,3vw,25px)}
+ .wing-overline,.wing-middle{font-size:7px;letter-spacing:.08em}
+ .wing-coordinate{font-size:6px}
+ .avatar-wrap{top:13%;width:38vw;height:52%}
+ .hero-title{top:65%}
+}
+@media(max-width:520px){
+ .awakening-scene{min-height:max(680px,100svh)}
+ .wing-drawing{inset:16% 0 25%;width:100%;height:59%;stroke-width:1.15}
+ .wing-identity{top:43%;width:35%;gap:7px}
+ .wing-identity-left{left:5%}.wing-identity-right{right:5%}
+ .wing-name,.wing-role{font-size:clamp(15px,4.4vw,21px)}
+ .wing-overline,.wing-middle{font-size:5px;letter-spacing:.05em}
+ .wing-coordinate{font-size:5px;letter-spacing:0}
+ .wing-middle{padding-top:7px}
+ .avatar-wrap{top:18%;left:50%;width:min(43vw,180px);height:36%;margin-left:max(-21.5vw,-90px)}
+ .hero-title{top:67%;left:0;right:0;margin-inline:auto}
+ .hero-title h1{font-size:clamp(64px,18vw,78px)}
+ .fragment-field{opacity:.78}
+}
+@media(prefers-reduced-motion:reduce){
+ .wing-drawing path{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+}
+
+/* Scene choreography — each section rises into view without hiding its content */
+.content-scene{clip-path:none}
+.content-scene>.scene-heading,
+.content-scene>.intro-layout,
+.content-scene>.about-layout,
+.content-scene>.interest-strip,
+.content-scene>.toolkit-intro,
+.content-scene>.skill-filters,
+.content-scene>.skills-grid,
+.content-scene>.fine-print,
+.content-scene>.featured-project,
+.content-scene>.project-list-heading,
+.content-scene>.project-list,
+.content-scene>.contact-layout,
+.content-scene>.universe-explorer,
+.content-scene>.universe-outro{will-change:transform,opacity}
+.projects-scene,.contact-scene{position:relative;isolation:isolate}
+.projects-scene:before,.contact-scene:before{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:linear-gradient(180deg,#ffffff30,transparent 34%);
+ opacity:.65
+}
+.projects-scene>*:not(.section-index),.contact-scene>*:not(.section-index){position:relative;z-index:1}
+.about-scene .curtain-panel{z-index:0}
+@media(prefers-reduced-motion:reduce){
+ .content-scene>*{will-change:auto!important}
+}
