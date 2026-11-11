@@ -49,9 +49,8 @@ export function useSceneTransitions(root: RefObject<HTMLElement | null>, reduced
           }
         } else if (scene.classList.contains('intro-scene')) {
           const copy = scene.querySelector<HTMLElement>('.intro-copy')
-          const meta = scene.querySelector<HTMLElement>('.intro-meta')
           const signature = scene.querySelector<HTMLElement>('.intro-signature')
-          const introTargets = [heading, copy, meta, signature].filter((target): target is HTMLElement => Boolean(target))
+          const introTargets = [heading, copy, signature].filter((target): target is HTMLElement => Boolean(target))
           if (introTargets.length) {
             gsap.fromTo(introTargets, { y: 42, opacity: 0 }, {
               y: 0,
