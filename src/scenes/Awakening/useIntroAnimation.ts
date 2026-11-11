@@ -23,14 +23,12 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
         scrollTrigger: {
           trigger: element,
           start: 'top top',
-          end: '+=190%',
+          end: '+=220%',
           scrub: 1,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            window.dispatchEvent(new CustomEvent('portfolio:intro-progress', { detail: self.progress }))
-          },
+          onUpdate: (self) => window.dispatchEvent(new CustomEvent('portfolio:intro-progress', { detail: self.progress })),
           onLeave: () => window.dispatchEvent(new CustomEvent('portfolio:intro-progress', { detail: 1 })),
           onEnterBack: () => window.dispatchEvent(new CustomEvent('portfolio:intro-progress', { detail: 1 })),
           onLeaveBack: () => window.dispatchEvent(new CustomEvent('portfolio:intro-progress', { detail: 0 })),
@@ -38,20 +36,22 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
       })
 
       timeline
+        // Hold the complete wing composition first; then fold both wings toward the character.
+        .to('[data-wing-left]', { x: 110, scaleX: 0.12, opacity: 0, transformOrigin: '100% 50%', ease: 'power3.in' }, 0.02)
+        .to('[data-wing-right]', { x: -110, scaleX: 0.12, opacity: 0, transformOrigin: '0% 50%', ease: 'power3.in' }, 0.02)
+        .to('.wing-spine', { scaleY: 0, opacity: 0, ease: 'power2.in' }, 0.02)
         .to(fragments, {
           x: 0, y: 0, rotation: 0, opacity: 1, scale: 1,
-          stagger: { each: 0.018, from: 'center' },
-          ease: 'power3.inOut',
-        }, 0)
-        .to('[data-avatar]', { y: -92, scale: 0.72, ease: 'power2.inOut' }, 0.08)
-        .to('[data-hero-title]', { y: -65, scale: 0.78, ease: 'power2.inOut' }, 0.12)
-        .to('.orbit-one', { rotation: 38, scale: 1.3, ease: 'none' }, 0)
-        .to('.orbit-two', { rotation: -42, scale: 0.82, ease: 'none' }, 0)
-        .to('.orbit-three', { rotation: 24, scale: 1.18, ease: 'none' }, 0)
-        .to('.hero-copy-top', { y: -42, opacity: 0, ease: 'none' }, 0.1)
-        .to('.scroll-cue', { y: 22, opacity: 0, ease: 'none' }, 0.1)
-        .to('.awakening-halo', { scale: 1.6, opacity: 0.12, ease: 'none' }, 0)
-        .to(element, { '--hero-scene-shift': '1', ease: 'none' }, 0)
+          stagger: { each: 0.018, from: 'center' }, ease: 'power3.inOut',
+        }, 0.18)
+        .to('[data-avatar]', { y: -92, scale: 0.72, ease: 'power2.inOut' }, 0.28)
+        .to('[data-hero-title]', { y: -65, scale: 0.78, ease: 'power2.inOut' }, 0.34)
+        .to('.orbit-one', { rotation: 38, scale: 1.3, ease: 'none' }, 0.16)
+        .to('.orbit-two', { rotation: -42, scale: 0.82, ease: 'none' }, 0.16)
+        .to('.orbit-three', { rotation: 24, scale: 1.18, ease: 'none' }, 0.16)
+        .to('.hero-copy-top', { y: -42, opacity: 0, ease: 'none' }, 0.34)
+        .to('.scroll-cue', { y: 22, opacity: 0, ease: 'none' }, 0.34)
+        .to('.awakening-halo', { scale: 1.6, opacity: 0.12, ease: 'none' }, 0.16)
     }, element)
 
     return () => {
