@@ -1,0 +1,3 @@
+import {profile} from '../../data/profile'
+import {SceneHeading} from '../../components/ui/SceneHeading'
+export function IntroductionScene(){return <section id="introduction" className="scene content-scene intro-scene"><div className="section-index">02 — THE OVERVIEW</div><div className="intro-layout"><SceneHeading number="02" eyebrow="A LITTLE ABOUT ME" title="Ideas deserve to become real."/><div className="intro-copy"><p className="large-copy">{profile.introduction}</p><div className="intro-meta"><span>BASED IN</span><strong>{profile.location}</strong><span>FOCUS</span><strong>WEB DEVELOPMENT / DATABASE SYSTEMS</strong></div></div></div><div className="scene-watermark" aria-hidden="true">02</div></section>}
