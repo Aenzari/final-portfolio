@@ -289,15 +289,10 @@
 .hero-bottom{z-index:6;font:9px var(--mono);letter-spacing:.13em}
 .scroll-cue{transition:letter-spacing .3s ease}
 .scroll-cue:hover{letter-spacing:.2em}
-.content-scene{position:sticky;top:0;z-index:calc(var(--scene-depth,1) + 1);transform-style:preserve-3d;backface-visibility:hidden;isolation:isolate}
-.intro-scene{z-index:2}
-.about-scene{z-index:3}
-.toolkit-scene{z-index:4}
-.projects-scene{z-index:5;transform-origin:50% 0}
-.contact-scene{z-index:6;transform-origin:50% 0}
-.universe-scene{z-index:7}
+.content-scene{position:relative;top:auto;z-index:1;transform:none;backface-visibility:visible;isolation:isolate}
+
 .curtain-panel{will-change:transform;transform:translateX(100%)}
-.projects-scene,.contact-scene{backface-visibility:hidden;transform-style:preserve-3d;box-shadow:0 -30px 90px #34313e0b}
+.projects-scene,.contact-scene{backface-visibility:visible;transform:none;box-shadow:none}
 .featured-art{perspective:900px}
 .featured-orbit{transform-style:preserve-3d;animation:orbit-drift 18s linear infinite}
 .featured-orbit.orbit-b{animation-direction:reverse;animation-duration:24s}
