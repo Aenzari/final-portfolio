@@ -1,7 +1,23 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { ContactShadows, Environment, Float } from '@react-three/drei'
-import type { Group } from 'three'
+import type { Group, PerspectiveCamera } from 'three'
+
+function CameraChoreography({ progress }: { progress: React.MutableRefObject<number> }) {
+  const { camera } = useThree()
+  useFrame((_, delta) => {
+    const amount = progress.current
+    const targetZ = 6.4 + amount * 2.35
+    const targetY = 1.55 + amount * 0.22
+    camera.position.z += (targetZ - camera.position.z) * Math.min(1, delta * 2.4)
+    camera.position.y += (targetY - camera.position.y) * Math.min(1, delta * 2.4)
+    const perspective = camera as PerspectiveCamera
+    perspective.fov += (30 + amount * 5 - perspective.fov) * Math.min(1, delta * 2)
+    perspective.updateProjectionMatrix()
+    camera.lookAt(0, 1.25, 0)
+  })
+  return null
+}
 
 function MaykModel({ reducedMotion }: { reducedMotion: boolean }) {
   const character = useRef<Group>(null)
@@ -53,6 +69,16 @@ function MaykModel({ reducedMotion }: { reducedMotion: boolean }) {
 }
 
 export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean }) {
+  const introProgress = useRef(0)
+  useEffect(() => {
+    const update = (event: Event) => {
+      const detail = (event as CustomEvent<number>).detail
+      introProgress.current = typeof detail === 'number' ? detail : 0
+    }
+    window.addEventListener('portfolio:intro-progress', update)
+    return () => window.removeEventListener('portfolio:intro-progress', update)
+  }, [])
+
   return (
     <div className="avatar-canvas" role="img" aria-label="Stylized three-dimensional character study of Mayk, wearing a light shirt and dark trousers">
       <Canvas camera={{ position: [0, 1.55, 6.4], fov: 30 }} shadows dpr={[1, 1.5]}>
@@ -67,6 +93,7 @@ export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean
             <MaykModel reducedMotion={reducedMotion} />
           </Float>
         )}
+        <CameraChoreography progress={introProgress} />
         <Environment preset="studio" />
         <ContactShadows position={[0, -0.03, 0]} opacity={0.22} blur={2.8} scale={4.5} />
       </Canvas>
