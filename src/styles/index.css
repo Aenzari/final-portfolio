@@ -487,12 +487,13 @@
     left: 50%;
     width: min(68vw, 290px);
     height: 32%;
-    transform: translateX(-50%);
+    margin-left: max(-34vw, -145px);
   }
   .hero-title {
     top: 70%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
   }
   .hero-title h1 {
     font-size: clamp(66px, 19vw, 82px);
