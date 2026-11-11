@@ -18,7 +18,7 @@ const worlds = [
 
 function OrbitalWorld({ position, color, active, index }: { position: [number, number, number]; color: string; active: boolean; index: number }) {
   const planet = useRef<Mesh>(null)
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!planet.current) return
     planet.current.rotation.y += delta * (active ? 0.5 : 0.16)
     const target = active ? 1.28 : 0.82
