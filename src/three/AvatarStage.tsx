@@ -60,9 +60,13 @@ export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean
         <ambientLight intensity={1.25} />
         <directionalLight position={[3, 6, 5]} intensity={2.1} castShadow />
         <directionalLight position={[-4, 2, -3]} intensity={0.65} color="#aaa6ce" />
-        <Float speed={1.05} rotationIntensity={0.035} floatIntensity={0.075}>
-          <MaykModel />
-        </Float>
+        {reducedMotion ? (
+          <MaykModel reducedMotion={reducedMotion} />
+        ) : (
+          <Float speed={1.05} rotationIntensity={0.035} floatIntensity={0.075}>
+            <MaykModel reducedMotion={reducedMotion} />
+          </Float>
+        )}
         <Environment preset="studio" />
         <ContactShadows position={[0, -0.03, 0]} opacity={0.22} blur={2.8} scale={4.5} />
       </Canvas>
