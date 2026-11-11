@@ -110,8 +110,7 @@ export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean
 
   return (
     <div className="avatar-canvas" role="img" aria-label="Stylized three-dimensional character study of Mayk, wearing a light shirt and dark trousers">
-      <Canvas camera={{ position: [0, 1.55, 6.4], fov: 30 }} shadows dpr={[1, 1.5]}>
-        <color attach="background" args={['#e9e4d9']} />
+      <Canvas camera={{ position: [0, 1.55, 6.4], fov: 30 }} shadows dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }} frameloop={reducedMotion ? 'demand' : 'always'}>
         <ambientLight intensity={1.25} />
         <directionalLight position={[3, 6, 5]} intensity={2.1} castShadow />
         <directionalLight position={[-4, 2, -3]} intensity={0.65} color="#aaa6ce" />
@@ -122,7 +121,8 @@ export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean
             <MaykModel reducedMotion={reducedMotion} />
           </Float>
         )}
-        {!reducedMotion && <CameraChoreography progress={introProgress} />}\n        <OrbitingAccents reducedMotion={reducedMotion} />
+        {!reducedMotion && <CameraChoreography progress={introProgress} />}
+        <OrbitingAccents reducedMotion={reducedMotion} />
         <Environment preset="studio" />
         <ContactShadows position={[0, -0.03, 0]} opacity={0.22} blur={2.8} scale={4.5} />
       </Canvas>
