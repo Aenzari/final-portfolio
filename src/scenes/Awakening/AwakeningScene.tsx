@@ -4,11 +4,21 @@ import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIntroAnimation } from './useIntroAnimation'
 
 const fragments = [
-  { text: 'CURIOUS', className: 'fragment fragment-a', x: -42, y: -38, rotation: -18 },
-  { text: 'BY NATURE', className: 'fragment fragment-b', x: -28, y: 22, rotation: 12 },
-  { text: 'DESIGN', className: 'fragment fragment-c', x: 38, y: -42, rotation: 16 },
-  { text: 'MEETS', className: 'fragment fragment-d', x: 52, y: 10, rotation: -12 },
-  { text: 'ENGINEERING', className: 'fragment fragment-e', x: 22, y: 48, rotation: 8 },
+  { text: 'C', x: -260, y: -170, r: -34, cls: 'wing-fragment wing-left wing-outer' },
+  { text: 'U', x: -180, y: -230, r: 22, cls: 'wing-fragment wing-left wing-upper' },
+  { text: 'R', x: -340, y: -40, r: -18, cls: 'wing-fragment wing-left wing-mid' },
+  { text: 'I', x: -250, y: 90, r: 31, cls: 'wing-fragment wing-left wing-lower' },
+  { text: 'O', x: -150, y: 180, r: -22, cls: 'wing-fragment wing-left wing-tip' },
+  { text: 'U', x: 260, y: -170, r: 34, cls: 'wing-fragment wing-right wing-outer' },
+  { text: 'S', x: 180, y: -230, r: -22, cls: 'wing-fragment wing-right wing-upper' },
+  { text: 'B', x: 340, y: -40, r: 18, cls: 'wing-fragment wing-right wing-mid' },
+  { text: 'Y', x: 250, y: 90, r: -31, cls: 'wing-fragment wing-right wing-lower' },
+  { text: 'N', x: 150, y: 180, r: 22, cls: 'wing-fragment wing-right wing-tip' },
+  { text: 'BY NATURE', x: -220, y: -12, r: -12, cls: 'fragment-word fragment-left-word' },
+  { text: 'DESIGN', x: 205, y: -8, r: 12, cls: 'fragment-word fragment-right-word' },
+  { text: 'MEETS', x: -170, y: 145, r: 8, cls: 'fragment-word fragment-lower-left' },
+  { text: 'ENGINEERING', x: 170, y: 145, r: -8, cls: 'fragment-word fragment-lower-right' },
+  { text: 'CURIOUS', x: 0, y: -265, r: 0, cls: 'fragment-word fragment-crown' },
 ]
 
 export function AwakeningScene() {
@@ -19,15 +29,18 @@ export function AwakeningScene() {
   return (
     <section id="awakening" ref={root} className="scene awakening-scene">
       <div className="awakening-grid" aria-hidden="true" />
+      <div className="awakening-halo halo-one" aria-hidden="true" />
+      <div className="awakening-halo halo-two" aria-hidden="true" />
       <div className="orbit orbit-one" aria-hidden="true" />
       <div className="orbit orbit-two" aria-hidden="true" />
+      <div className="orbit orbit-three" aria-hidden="true" />
       <div className="fragment-field" aria-label="Curious by nature, design meets engineering">
         {fragments.map((fragment) => (
           <span
-            key={fragment.text}
-            className={fragment.className}
+            key={fragment.text + fragment.cls}
+            className={fragment.cls}
             data-fragment
-            style={{ '--scatter-x': `${fragment.x}px`, '--scatter-y': `${fragment.y}px`, '--scatter-rotation': `${fragment.rotation}deg` } as CSSProperties}
+            style={{ '--scatter-x': `${fragment.x}px`, '--scatter-y': `${fragment.y}px`, '--scatter-rotation': `${fragment.r}deg` } as CSSProperties}
           >
             {fragment.text}
           </span>
