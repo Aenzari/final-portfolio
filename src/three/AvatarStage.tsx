@@ -19,6 +19,35 @@ function CameraChoreography({ progress }: { progress: React.MutableRefObject<num
   return null
 }
 
+function OrbitingAccents({ reducedMotion }: { reducedMotion: boolean }) {
+  const rig = useRef<Group>(null)
+  useFrame((_, delta) => {
+    if (!rig.current || reducedMotion) return
+    rig.current.rotation.y += delta * 0.12
+    rig.current.rotation.z = Math.sin(performance.now() * 0.00025) * 0.035
+  })
+  return (
+    <group ref={rig} position={[0, 1.45, -0.18]}>
+      <mesh rotation={[Math.PI / 2.7, 0.15, 0]}>
+        <torusGeometry args={[1.55, 0.008, 8, 160]} />
+        <meshStandardMaterial color="#8982a9" metalness={0.55} roughness={0.38} transparent opacity={0.5} />
+      </mesh>
+      <mesh rotation={[Math.PI / 2.2, -0.25, 0.45]}>
+        <torusGeometry args={[1.82, 0.005, 8, 160]} />
+        <meshStandardMaterial color="#b4a48b" metalness={0.45} roughness={0.42} transparent opacity={0.42} />
+      </mesh>
+      <mesh position={[1.42, 0.38, 0.1]}>
+        <icosahedronGeometry args={[0.045, 1]} />
+        <meshStandardMaterial color="#8b84aa" metalness={0.7} roughness={0.25} />
+      </mesh>
+      <mesh position={[-1.62, -0.42, -0.08]}>
+        <octahedronGeometry args={[0.055, 0]} />
+        <meshStandardMaterial color="#b4a48b" metalness={0.65} roughness={0.3} />
+      </mesh>
+    </group>
+  )
+}
+
 function MaykModel({ reducedMotion }: { reducedMotion: boolean }) {
   const character = useRef<Group>(null)
   const { pointer } = useThree()
@@ -93,7 +122,7 @@ export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean
             <MaykModel reducedMotion={reducedMotion} />
           </Float>
         )}
-        <CameraChoreography progress={introProgress} />
+        <CameraChoreography progress={introProgress} />\n        <OrbitingAccents reducedMotion={reducedMotion} />
         <Environment preset="studio" />
         <ContactShadows position={[0, -0.03, 0]} opacity={0.22} blur={2.8} scale={4.5} />
       </Canvas>
