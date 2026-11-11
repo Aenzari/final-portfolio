@@ -25,3 +25,17 @@
 @media(max-width:800px){.fragment-a{left:7%;top:31%}.fragment-b{left:9%;top:53%}.fragment-c{right:7%;top:31%}.fragment-d{right:8%;top:48%}.fragment-e{left:32%;top:73%}.fragment{letter-spacing:.12em}}
 @media(max-width:480px){.fragment{font-size:8px;letter-spacing:.08em}.fragment-a{left:4%;top:32%}.fragment-b{left:6%;top:49%}.fragment-c{right:4%;top:32%}.fragment-d{right:5%;top:47%}.fragment-e{left:26%;top:73%}.avatar-wrap{width:88vw;height:58%;top:12%}.hero-title{top:61%}}
 [data-motion="reduced"] .fragment{transform:none!important;opacity:1!important}
+
+
+/* Phase 3 — scroll scene transitions */
+.content-scene{transform-origin:50% 0;isolation:isolate}
+.content-scene .scene-heading,.content-scene .section-index{will-change:transform,opacity}
+.about-scene .curtain-panel{will-change:transform;backface-visibility:hidden}
+.projects-scene,.contact-scene{will-change:transform}
+@media(prefers-reduced-motion:reduce){
+  .content-scene,.content-scene *{will-change:auto!important}
+  .about-scene .curtain-panel{transform:none!important}
+}
+@media(max-width:800px){
+  .projects-scene,.contact-scene{transform:none}
+}
