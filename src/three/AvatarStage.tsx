@@ -7,12 +7,13 @@ function CameraChoreography({ progress }: { progress: React.MutableRefObject<num
   const { camera } = useThree()
   useFrame((_, delta) => {
     const amount = progress.current
-    const targetZ = 6.4 + amount * 2.35
-    const targetY = 1.55 + amount * 0.22
+    // Keep the character locked to the same center point; only the lens breathes.
+    const targetZ = 6.4
     camera.position.z += (targetZ - camera.position.z) * Math.min(1, delta * 2.4)
-    camera.position.y += (targetY - camera.position.y) * Math.min(1, delta * 2.4)
+    camera.position.y += (1.55 - camera.position.y) * Math.min(1, delta * 2.4)
     const perspective = camera as PerspectiveCamera
-    perspective.fov += (30 + amount * 5 - perspective.fov) * Math.min(1, delta * 2)
+    const lensBreath = Math.sin(amount * Math.PI)
+    perspective.fov += (30 - lensBreath * 3.5 - perspective.fov) * Math.min(1, delta * 2)
     perspective.updateProjectionMatrix()
     camera.lookAt(0, 1.25, 0)
   })
