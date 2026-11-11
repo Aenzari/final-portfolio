@@ -320,3 +320,32 @@
 @media(prefers-reduced-motion:reduce){
  .featured-orbit{animation:none}
 }
+
+
+/* Universe finale — layered 3D orbital exhibit */
+.universe-map{overflow:visible}
+.universe-canvas{position:absolute;inset:0;z-index:0;pointer-events:none;filter:drop-shadow(0 28px 36px #37334518)}
+.universe-canvas canvas{display:block!important;width:100%!important;height:100%!important}
+.universe-map-vignette{position:absolute;inset:7%;z-index:0;border:1px solid #77718f20;border-radius:50%;background:radial-gradient(circle at 50% 48%,#e7e2ef00 0%,#d8d4e333 68%,#d8d4e355 100%);pointer-events:none}
+.universe-core{z-index:1;border:1px solid #e7e2ef44;box-shadow:0 0 0 8px #77718f0d,0 0 45px #77718f35,inset 0 0 25px #ffffff12}
+.universe-node{z-index:3;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.universe-node.is-active{box-shadow:0 0 0 4px #77718f1e,0 16px 42px #34313e30}
+.universe-detail{overflow:hidden;animation:universe-panel-in .45s cubic-bezier(.2,.8,.2,1) both}
+.universe-detail::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#81799f,#b9ad9b 65%,transparent)}
+.universe-detail-mark{animation:universe-mark-turn 16s linear infinite}
+.universe-tags span{transition:background .2s ease,color .2s ease,border-color .2s ease}
+.universe-tags span:hover{background:#393644;color:#f5f2eb;border-color:#393644}
+@keyframes universe-panel-in{from{opacity:0;transform:translate3d(18px,8px,0);filter:blur(5px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+@keyframes universe-mark-turn{to{transform:rotate(360deg)}}
+@media(max-width:900px){
+ .universe-canvas{inset:2%}
+}
+@media(max-width:560px){
+ .universe-canvas{inset:0}
+ .universe-map-vignette{inset:8%}
+ .universe-node{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .universe-detail,.universe-detail-mark{animation:none}
+ .universe-tags span{transition:none}
+}
