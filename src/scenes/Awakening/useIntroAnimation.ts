@@ -13,9 +13,9 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
       const fragments = gsap.utils.toArray<HTMLElement>('[data-fragment]')
       const progress = { value: 0 }
       gsap.set(fragments, {
-        x: (index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-x')) || 0,
-        y: (index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-y')) || 0,
-        rotation: (index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-rotation')) || 0,
+        x: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-x')) || 0,
+        y: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-y')) || 0,
+        rotation: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-rotation')) || 0,
         opacity: 0.12,
         scale: 0.72,
       })
