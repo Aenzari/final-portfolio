@@ -321,9 +321,7 @@
  .hero-title{top:62%}
  .hero-title h1{font-size:82px}
  .orbit-one{width:90vw}.orbit-two{width:70vw}.orbit-three{width:110vw}
- .content-scene{position:relative;top:auto}
 }
 @media(prefers-reduced-motion:reduce){
  .featured-orbit{animation:none}
- .content-scene{position:relative;top:auto}
 }
