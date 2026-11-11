@@ -10,16 +10,8 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
     if (!element || reducedMotion) return
 
     const context = gsap.context(() => {
-      const fragments = gsap.utils.toArray<HTMLElement>('[data-fragment]')
       const lines = gsap.utils.toArray<SVGPathElement>('.wing-drawing path')
 
-      gsap.set(fragments, {
-        x: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-x')) || 0,
-        y: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-y')) || 0,
-        rotation: (_index, target) => Number.parseFloat(target.style.getPropertyValue('--scatter-rotation')) || 0,
-        opacity: 0,
-        scale: 0.72,
-      })
       lines.forEach((line) => {
         const length = line.getTotalLength()
         gsap.set(line, { strokeDasharray: length, strokeDashoffset: 0 })
@@ -46,12 +38,9 @@ export function useIntroAnimation(root: RefObject<HTMLElement | null>, reducedMo
         .to('[data-wing-left]', { x: -90, opacity: 0, duration: 0.85, ease: 'power2.in' }, '>')
         .to('[data-wing-right]', { x: 90, opacity: 0, duration: 0.85, ease: 'power2.in' }, '<')
         .to(lines, { strokeDashoffset: (index) => index < 2 ? 900 : 520, opacity: 0, duration: 0.9, stagger: 0.035, ease: 'power2.in' }, '<')
-        .to(fragments, {
-          x: 0, y: 0, rotation: 0, opacity: 1, scale: 1, duration: 1.25,
-          stagger: { each: 0.035, from: 'edges' }, ease: 'power3.inOut',
-        }, '-=0.18')
-        .to('[data-avatar]', { y: -92, scale: 0.72, duration: 1.1, ease: 'power2.inOut' }, '-=0.45')
-        .to('[data-hero-title]', { y: -65, scale: 0.78, duration: 1.05, ease: 'power2.inOut' }, '<')
+        .to('[data-avatar]', { scale: 1.12, duration: 1.15, ease: 'power2.inOut' }, '-=0.18')
+        .to('[data-avatar]', { scale: 1, duration: 0.9, ease: 'power2.inOut' }, '>')
+        .to('[data-hero-title]', { scale: 0.94, duration: 1.05, ease: 'power2.inOut' }, '<')
         .to('.orbit-one', { rotation: 38, scale: 1.3, duration: 1.4, ease: 'none' }, '<')
         .to('.orbit-two', { rotation: -42, scale: 0.82, duration: 1.4, ease: 'none' }, '<')
         .to('.orbit-three', { rotation: 24, scale: 1.18, duration: 1.4, ease: 'none' }, '<')
