@@ -34,14 +34,27 @@ export function AwakeningScene() {
       <div className="orbit orbit-one" aria-hidden="true" />
       <div className="orbit orbit-two" aria-hidden="true" />
       <div className="orbit orbit-three" aria-hidden="true" />
+
+      <div className="wing-composition" aria-label="Michael Angelou C. Quinit, Full Stack Engineering">
+        <div className="wing-panel wing-panel-left" data-wing-left>
+          <span className="wing-overline">THE MIND BEHIND THE BUILD</span>
+          <p className="wing-name">MICHAEL<br />ANGELOU</p>
+          <span className="wing-middle">C. QUINIT</span>
+          <span className="wing-coordinate">08°13' N — 124°14' E</span>
+        </div>
+        <div className="wing-panel wing-panel-right" data-wing-right>
+          <span className="wing-overline">CRAFT / CODE / CREATION</span>
+          <p className="wing-role">FULL STACK<br /><em>ENGINEERING</em></p>
+          <span className="wing-middle">IDEAS INTO INTERFACES</span>
+          <span className="wing-coordinate">DESIGNING THE DIGITAL</span>
+        </div>
+        <div className="wing-spine" aria-hidden="true"><span>✳</span></div>
+      </div>
+
       <div className="fragment-field" aria-label="Curious by nature, design meets engineering">
         {fragments.map((fragment) => (
-          <span
-            key={fragment.text + fragment.cls}
-            className={fragment.cls}
-            data-fragment
-            style={{ '--scatter-x': `${fragment.x}px`, '--scatter-y': `${fragment.y}px`, '--scatter-rotation': `${fragment.r}deg` } as CSSProperties}
-          >
+          <span key={fragment.text + fragment.cls} className={fragment.cls} data-fragment
+            style={{ '--scatter-x': `${fragment.x}px`, '--scatter-y': `${fragment.y}px`, '--scatter-rotation': `${fragment.r}deg` } as CSSProperties}>
             {fragment.text}
           </span>
         ))}
