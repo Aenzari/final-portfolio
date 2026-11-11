@@ -19,6 +19,7 @@ export function useSceneTransitions(root: RefObject<HTMLElement | null>, reduced
         if (scene.classList.contains('about-scene')) {
           const curtain = scene.querySelector<HTMLElement>('.curtain-panel')
           const story = scene.querySelector<HTMLElement>('.story-card')
+          const interests = scene.querySelector<HTMLElement>('.interest-strip')
 
           if (curtain) {
             gsap.set(curtain, { transformOrigin: '100% 50%', scaleX: 1 })
@@ -35,13 +36,28 @@ export function useSceneTransitions(root: RefObject<HTMLElement | null>, reduced
             })
           }
 
-          const aboutTargets = [heading, story].filter((target): target is HTMLElement => Boolean(target))
+          const aboutTargets = [heading, story, interests].filter((target): target is HTMLElement => Boolean(target))
           if (aboutTargets.length) {
             gsap.fromTo(aboutTargets, { y: 34, opacity: 0 }, {
               y: 0,
               opacity: 1,
               duration: 0.9,
               stagger: 0.14,
+              ease: 'power3.out',
+              scrollTrigger: { trigger: scene, start: 'top 68%', once: true },
+            })
+          }
+        } else if (scene.classList.contains('intro-scene')) {
+          const copy = scene.querySelector<HTMLElement>('.intro-copy')
+          const meta = scene.querySelector<HTMLElement>('.intro-meta')
+          const signature = scene.querySelector<HTMLElement>('.intro-signature')
+          const introTargets = [heading, copy, meta, signature].filter((target): target is HTMLElement => Boolean(target))
+          if (introTargets.length) {
+            gsap.fromTo(introTargets, { y: 42, opacity: 0 }, {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              stagger: 0.13,
               ease: 'power3.out',
               scrollTrigger: { trigger: scene, start: 'top 68%', once: true },
             })
