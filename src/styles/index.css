@@ -388,3 +388,143 @@
  .hero-title{top:66%}
 }
 [data-motion="reduced"] .wing-panel{opacity:1!important;transform:none!important}
+
+
+/* Responsive opening composition — protect the wing typography and center stage */
+@media (min-width: 801px) {
+  .wing-composition {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 36vw) minmax(0, 1fr);
+    padding-inline: clamp(28px, 5vw, 76px);
+  }
+  .wing-panel {
+    min-height: clamp(250px, 36vh, 360px);
+  }
+  .avatar-wrap {
+    width: min(40vw, 520px);
+  }
+}
+@media (min-width: 521px) and (max-width: 800px) {
+  .wing-composition {
+    grid-template-columns: minmax(0, 1fr) minmax(170px, 25vw) minmax(0, 1fr);
+    padding: 15vh 18px 17vh;
+  }
+  .wing-panel {
+    min-height: 210px;
+    padding-inline: 12px;
+  }
+  .wing-name,
+  .wing-role {
+    font-size: clamp(17px, 3vw, 25px);
+  }
+  .wing-overline,
+  .wing-coordinate,
+  .wing-middle {
+    font-size: 6px;
+    letter-spacing: .08em;
+  }
+  .avatar-wrap {
+    top: 12%;
+    width: 42vw;
+    height: 57%;
+  }
+  .hero-title {
+    top: 63%;
+  }
+}
+@media (max-width: 520px) {
+  .awakening-scene {
+    min-height: max(680px, 100svh);
+  }
+  .wing-composition {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto;
+    align-items: start;
+    gap: 10px;
+    padding: max(94px, 14svh) 14px 0;
+  }
+  .wing-panel {
+    height: 154px;
+    min-height: 0;
+    padding: 14px 9px;
+    gap: 9px;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .wing-panel-left {
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 92%);
+  }
+  .wing-panel-right {
+    clip-path: polygon(0 0, 100% 8%, 100% 92%, 0 100%);
+  }
+  .wing-name,
+  .wing-role {
+    font-size: clamp(16px, 5vw, 23px);
+    line-height: .98;
+    letter-spacing: -.065em;
+  }
+  .wing-overline,
+  .wing-middle {
+    font-size: 6px;
+    letter-spacing: .07em;
+  }
+  .wing-coordinate {
+    font-size: 5px;
+    letter-spacing: .04em;
+  }
+  .wing-middle {
+    padding-top: 9px;
+  }
+  .wing-spine {
+    top: 25%;
+    height: 12%;
+  }
+  .wing-spine span {
+    font-size: 16px;
+    padding: 7px;
+  }
+  .avatar-wrap {
+    top: 37%;
+    left: 50%;
+    width: min(68vw, 290px);
+    height: 32%;
+    transform: translateX(-50%);
+  }
+  .hero-title {
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .hero-title h1 {
+    font-size: clamp(66px, 19vw, 82px);
+  }
+  .hero-subtitle {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+  .fragment-field {
+    opacity: .9;
+  }
+  .hero-bottom {
+    bottom: 17px;
+  }
+  .hero-bottom > span:last-child {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .wing-panel {
+    height: 144px;
+    padding-inline: 7px;
+  }
+  .wing-name,
+  .wing-role {
+    font-size: 15px;
+  }
+  .wing-overline,
+  .wing-middle {
+    font-size: 5px;
+  }
+  .hero-title h1 {
+    font-size: 64px;
+  }
+}
