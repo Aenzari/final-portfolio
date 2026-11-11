@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, type CSSProperties } from 'react'
 import { AvatarStage } from '../../three/AvatarStage'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIntroAnimation } from './useIntroAnimation'
@@ -27,7 +27,7 @@ export function AwakeningScene() {
             key={fragment.text}
             className={fragment.className}
             data-fragment
-            style={{ '--scatter-x': `${fragment.x}px`, '--scatter-y': `${fragment.y}px`, '--scatter-rotation': `${fragment.rotation}deg` } as React.CSSProperties}
+            style={{ '--scatter-x': `${fragment.x}px`, '--scatter-y': `${fragment.y}px`, '--scatter-rotation': `${fragment.rotation}deg` } as CSSProperties}
           >
             {fragment.text}
           </span>
