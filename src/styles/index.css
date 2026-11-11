@@ -14,3 +14,14 @@
 @media(max-width:800px){.nav-location{display:none}.scene-progress{right:10px}.avatar-wrap{width:75vw;height:52%;top:16%}.hero-title{top:59%}.fragment-left{left:4%;top:31%}.fragment-right{right:4%;top:37%}.hero-copy-top{top:13%}.intro-layout,.about-layout,.contact-layout{grid-template-columns:1fr;gap:35px}.content-scene{padding:130px 26px 90px}.section-index{left:26px;top:88px}.skills-grid{grid-template-columns:repeat(2,1fr)}.featured-project{grid-template-columns:1fr}.featured-art{min-height:250px}.world-grid{grid-template-columns:repeat(2,1fr)}.scene-side-note{right:20px}}
 @media(max-width:480px){.hero-bottom{font-size:8px;left:18px;right:18px}.hero-bottom>span:first-child{display:none}.fragment{font-size:8px}.skills-grid{grid-template-columns:1fr 1fr}.skill-card{min-height:145px;padding:14px}.skill-card h3{font-size:16px}.project-row{grid-template-columns:28px 1fr 18px}.project-category{display:none}.world-grid{grid-template-columns:1fr 1fr}.world-card{min-height:190px;padding:15px}.world-card h3{font-size:19px;margin-top:45px}.site-footer{flex-wrap:wrap;font-size:9px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* Awakening / Phase 2 */
+.fragment-field{position:absolute;z-index:3;inset:0;pointer-events:none}
+.fragment{position:absolute;display:block;font:clamp(10px,1.1vw,15px) var(--mono);letter-spacing:.22em;color:#555361;white-space:nowrap;will-change:transform,opacity}
+.fragment-a{left:18%;top:34%}.fragment-b{left:24%;top:55%}.fragment-c{right:20%;top:34%}.fragment-d{right:23%;top:49%}.fragment-e{left:42%;top:72%;font-size:clamp(9px,.9vw,12px)}
+.avatar-wrap{isolation:isolate;will-change:transform}.avatar-canvas canvas{outline:none}.avatar-label{font-size:9px;letter-spacing:.16em}
+.hero-title{width:max-content;max-width:90vw}.hero-title h1{text-shadow:0 10px 40px #30313a0b}.hero-subtitle{color:#66636e}
+.awakening-scene:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 25%,#d8d2c71c 78%);z-index:1}
+.awakening-scene>*{z-index:2}.awakening-scene .awakening-grid,.awakening-scene .orbit{z-index:0}
+@media(max-width:800px){.fragment-a{left:7%;top:31%}.fragment-b{left:9%;top:53%}.fragment-c{right:7%;top:31%}.fragment-d{right:8%;top:48%}.fragment-e{left:32%;top:73%}.fragment{letter-spacing:.12em}}
+@media(max-width:480px){.fragment{font-size:8px;letter-spacing:.08em}.fragment-a{left:4%;top:32%}.fragment-b{left:6%;top:49%}.fragment-c{right:4%;top:32%}.fragment-d{right:5%;top:47%}.fragment-e{left:26%;top:73%}.avatar-wrap{width:88vw;height:58%;top:12%}.hero-title{top:61%}}
+[data-motion="reduced"] .fragment{transform:none!important;opacity:1!important}
