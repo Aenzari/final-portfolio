@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, Sparkles } from '@react-three/drei'
 import type { Group, Mesh } from 'three'
 import { ArrowUpRight, Compass, Database, Gamepad2, GraduationCap, Layers3, Sparkles as SparkleIcon, Trophy } from 'lucide-react'
@@ -43,14 +43,30 @@ function OrbitalWorld({ position, color, active, index }: { position: [number, n
 
 function UniverseModel({ activeId }: { activeId: string }) {
   const system = useRef<Group>(null)
+  const { pointer } = useThree()
   useFrame((_, delta) => {
-    if (system.current) system.current.rotation.y += delta * 0.035
+    if (!system.current) return
+    system.current.rotation.y += delta * 0.035
+    system.current.rotation.x += ((pointer.y * 0.055) - system.current.rotation.x) * Math.min(1, delta * 1.8)
+    system.current.rotation.z += ((-pointer.x * 0.035) - system.current.rotation.z) * Math.min(1, delta * 1.8)
   })
   return (
     <group ref={system}>
       <mesh>
         <sphereGeometry args={[0.53, 48, 48]} />
         <meshStandardMaterial color="#393644" metalness={0.7} roughness={0.22} emissive="#77718f" emissiveIntensity={0.55} />
+      </mesh>
+      <mesh scale={1.16}>
+        <icosahedronGeometry args={[0.53, 2]} />
+        <meshBasicMaterial color="#c7bfdf" wireframe transparent opacity={0.16} />
+      </mesh>
+      <mesh scale={1.38}>
+        <sphereGeometry args={[0.53, 32, 32]} />
+        <meshBasicMaterial color="#aaa0d1" transparent opacity={0.045} />
+      </mesh>
+      <mesh rotation={[0.25, 0.8, 0.2]}>
+        <torusGeometry args={[1.34, 0.004, 6, 160]} />
+        <meshBasicMaterial color="#b9ad9b" transparent opacity={0.3} />
       </mesh>
       <mesh rotation={[Math.PI / 2.3, 0.2, 0]}>
         <torusGeometry args={[0.76, 0.012, 8, 120]} />
@@ -61,7 +77,7 @@ function UniverseModel({ activeId }: { activeId: string }) {
         <meshBasicMaterial color="#b9ad9b" transparent opacity={0.42} />
       </mesh>
       {worlds.map((world, index) => <OrbitalWorld key={world.id} position={world.position} color={world.color} active={activeId === world.id} index={index} />)}
-      <Sparkles count={75} scale={7.5} size={1.6} speed={0.18} color="#827b9f" />
+      <Sparkles count={150} scale={8.5} size={1.8} speed={0.24} color="#827b9f" />
     </group>
   )
 }
