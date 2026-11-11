@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Sparkles } from 'lucide-react'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { projects } from '../../data/profile'
 import { SceneHeading } from '../../components/ui/SceneHeading'
 
