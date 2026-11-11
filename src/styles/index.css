@@ -174,3 +174,81 @@
  .featured-project,.project-row,.email-link,.contact-social{transition:none}
  .featured-project:hover,.project-row:hover{transform:none;padding-left:4px}
 }
+
+
+/* Phase 6 — interactive personal universe */
+.universe-scene{position:relative;overflow:hidden;min-height:115svh;background:linear-gradient(138deg,#d9d5e5 0%,#e5e0e8 48%,#d8ded9 100%)}
+.universe-glow{position:absolute;width:min(70vw,900px);aspect-ratio:1;top:8%;left:50%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#b7b0d52e 0%,#b7b0d500 68%);pointer-events:none}
+.universe-explorer{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);gap:clamp(30px,6vw,88px);align-items:center;margin-top:46px}
+.universe-map{position:relative;width:100%;max-width:620px;aspect-ratio:1;margin-inline:auto;border-radius:50%;isolation:isolate}
+.universe-orbit{position:absolute;left:50%;top:50%;border:1px solid #4b486b2b;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+.orbit-one{width:44%;height:44%}
+.orbit-two{width:72%;height:72%;transform:translate(-50%,-50%) rotate(-28deg);border-style:dashed}
+.orbit-three{width:96%;height:96%;transform:translate(-50%,-50%) rotate(34deg);border-color:#4b486b20}
+.universe-core{position:absolute;left:50%;top:50%;width:112px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:50%;background:#34313e;color:#f5f2eb;transform:translate(-50%,-50%);box-shadow:0 0 0 10px #34313e0c,0 0 55px #625c8a32}
+.universe-core>span{font:italic 42px Georgia,serif;line-height:.9}
+.universe-core small{font:7px/1.4 var(--mono);letter-spacing:.12em;text-align:center;color:#d9d5e5}
+.universe-node{position:absolute;z-index:2;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:100px;padding:8px 9px;border:1px solid #4b486b22;border-radius:14px;background:#f5f2ebd9;color:var(--ink);box-shadow:0 8px 24px #34313e0a;cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease}
+.universe-node:hover{transform:translateY(-4px);box-shadow:0 14px 28px #34313e15}
+.universe-node.is-active{background:#393644;color:#f5f2eb;border-color:#393644;box-shadow:0 12px 34px #34313e2b;transform:translateY(-3px)}
+.universe-node-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#dcd8e8;color:#49445f}
+.universe-node.is-active .universe-node-icon{background:#77718f;color:#fff}
+.universe-node-label{font-size:10px;font-weight:650;white-space:nowrap}
+.universe-node-number{font:8px var(--mono);letter-spacing:.1em;opacity:.55}
+.node-1{left:50%;top:0;transform:translate(-50%,-10%)}
+.node-1:hover,.node-1.is-active{transform:translate(-50%,-14%)}
+.node-2{right:2%;top:19%}
+.node-3{right:0;bottom:18%}
+.node-4{left:50%;bottom:0;transform:translate(-50%,10%)}
+.node-4:hover,.node-4.is-active{transform:translate(-50%,6%)}
+.node-5{left:0;bottom:18%}
+.node-6{left:2%;top:19%}
+.node-7{left:50%;top:50%;transform:translate(-50%,-50%) translateY(-118px)}
+.node-7:hover,.node-7.is-active{transform:translate(-50%,-50%) translateY(-122px)}
+.universe-map-caption{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);font:8px var(--mono);letter-spacing:.15em;color:#656177;white-space:nowrap}
+.universe-detail{position:relative;display:flex;flex-direction:column;min-height:370px;padding:clamp(25px,3.6vw,42px);border:1px solid #4b486b28;background:#f5f2ebad;box-shadow:0 24px 65px #34313e0a}
+.universe-detail-top{display:flex;align-items:center;justify-content:space-between}
+.universe-detail-top .eyebrow{color:#6d6689}
+.universe-detail-mark{font-size:25px;color:#81799f}
+.universe-detail-subtitle{margin:35px 0 8px;font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.universe-detail h3{margin:0;font-size:clamp(30px,4vw,46px);letter-spacing:-.07em;line-height:1.05}
+.universe-detail-copy{max-width:490px;margin:18px 0 22px;font-size:13px;line-height:1.85;color:#696674}
+.universe-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+.universe-tags span{padding:7px 10px;border:1px solid #4b486b20;border-radius:99px;font:8px var(--mono);letter-spacing:.03em;color:#615d70}
+.universe-detail-link{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:22px;font:9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#514b70}
+.universe-detail-footer{display:flex;justify-content:space-between;gap:12px;margin-top:26px;padding-top:14px;border-top:1px solid #4b486b20;font:8px var(--mono);letter-spacing:.1em;color:#898594}
+.universe-outro{position:relative;z-index:1;margin:55px 0 0;text-align:center;font:italic clamp(17px,2vw,23px) Georgia,serif;color:#6e6980}
+@media(max-width:900px){
+ .universe-explorer{grid-template-columns:1fr;gap:52px}
+ .universe-map{max-width:560px}
+ .universe-detail{width:100%;max-width:620px;margin-inline:auto}
+}
+@media(max-width:560px){
+ .universe-scene{min-height:auto;padding-bottom:110px}
+ .universe-explorer{margin-top:30px;gap:40px}
+ .universe-map{width:100%;max-width:430px;aspect-ratio:1}
+ .universe-node{min-width:78px;padding:6px 6px;gap:5px;border-radius:11px}
+ .universe-node-icon{width:28px;height:28px}
+ .universe-node-label{font-size:8px}
+ .universe-node-number{font-size:7px}
+ .universe-core{width:82px}
+ .universe-core>span{font-size:32px}
+ .universe-core small{font-size:6px}
+ .node-2{right:-1%;top:17%}
+ .node-3{right:-2%;bottom:16%}
+ .node-5{left:-2%;bottom:16%}
+ .node-6{left:-1%;top:17%}
+ .node-7{transform:translate(-50%,-50%) translateY(-83px)}
+ .node-7:hover,.node-7.is-active{transform:translate(-50%,-50%) translateY(-87px)}
+ .universe-detail{min-height:350px;padding:24px}
+ .universe-detail-subtitle{margin-top:26px}
+ .universe-outro{margin-top:38px}
+}
+@media(prefers-reduced-motion:reduce){
+ .universe-node{transition:none}
+ .universe-node:hover,.universe-node.is-active{transform:none}
+ .node-1,.node-4{transform:translateX(-50%)}
+ .node-1:hover,.node-1.is-active,.node-4:hover,.node-4.is-active{transform:translateX(-50%)}
+ .node-7{transform:translate(-50%,-50%) translateY(-118px)}
+ .node-7:hover,.node-7.is-active{transform:translate(-50%,-50%) translateY(-118px)}
+}
