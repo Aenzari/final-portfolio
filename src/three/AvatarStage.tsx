@@ -122,7 +122,7 @@ export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean
             <MaykModel reducedMotion={reducedMotion} />
           </Float>
         )}
-        <CameraChoreography progress={introProgress} />\n        <OrbitingAccents reducedMotion={reducedMotion} />
+        {!reducedMotion && <CameraChoreography progress={introProgress} />}\n        <OrbitingAccents reducedMotion={reducedMotion} />
         <Environment preset="studio" />
         <ContactShadows position={[0, -0.03, 0]} opacity={0.22} blur={2.8} scale={4.5} />
       </Canvas>
