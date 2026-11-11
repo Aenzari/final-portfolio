@@ -76,23 +76,8 @@ export function useSceneTransitions(root: RefObject<HTMLElement | null>, reduced
           })
         }
 
-        if (scene.classList.contains('projects-scene') || scene.classList.contains('contact-scene')) {
-          gsap.fromTo(scene, { y: 130, scale: 0.94, rotationX: -5, transformOrigin: '50% 0%' }, {
-            y: 0, scale: 1, rotationX: 0, ease: 'power2.out',
-            scrollTrigger: {
-              trigger: scene, start: 'top bottom', end: 'top top', scrub: 0.85,
-              invalidateOnRefresh: true,
-            },
-          })
-        }
-
-        if (scene.classList.contains('toolkit-scene')) {
-          gsap.fromTo(scene, { y: 65, scale: 0.975 }, {
-            y: 0, scale: 1, ease: 'none',
-            scrollTrigger: { trigger: scene, start: 'top bottom', end: 'top top', scrub: 0.8 },
-          })
-        }
-
+        // Sections remain in normal document flow: content must be fully readable
+        // before the next section enters. Only inner elements animate.
         scene.style.setProperty('--scene-depth', String(sceneIndex + 1))
       })
 
