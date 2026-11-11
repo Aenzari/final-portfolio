@@ -3,12 +3,12 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { ContactShadows, Environment, Float } from '@react-three/drei'
 import type { Group } from 'three'
 
-function MaykModel() {
+function MaykModel({ reducedMotion }: { reducedMotion: boolean }) {
   const character = useRef<Group>(null)
   const { pointer } = useThree()
 
   useFrame((_, delta) => {
-    if (!character.current) return
+    if (!character.current || reducedMotion) return
     character.current.rotation.y += (pointer.x * 0.2 - character.current.rotation.y) * Math.min(1, delta * 2.2)
     character.current.rotation.x += (-pointer.y * 0.045 - character.current.rotation.x) * Math.min(1, delta * 2)
   })
@@ -52,9 +52,9 @@ function MaykModel() {
   )
 }
 
-export function AvatarStage() {
+export function AvatarStage({ reducedMotion = false }: { reducedMotion?: boolean }) {
   return (
-    <div className="avatar-canvas">
+    <div className="avatar-canvas" role="img" aria-label="Stylized three-dimensional character study of Mayk, wearing a light shirt and dark trousers">
       <Canvas camera={{ position: [0, 1.55, 6.4], fov: 30 }} shadows dpr={[1, 1.5]}>
         <color attach="background" args={['#e9e4d9']} />
         <ambientLight intensity={1.25} />
